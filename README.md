@@ -1,0 +1,2 @@
+# scrapyjo
+scraper with playwrite
