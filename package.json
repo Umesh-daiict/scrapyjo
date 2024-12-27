@@ -4,7 +4,8 @@
   "description": "A web scraper application to count job openings for React, Node, and Python.",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "debug": "PWDEBUG=1 node src/index.js"
   },
   "dependencies": {
     "dotenv": "^16.4.7",
