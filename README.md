@@ -30,10 +30,16 @@ This project is a web scraper application built using Node.js and Playwright. It
 
 To run the web scraper, execute the following command:
 ```
-pnpm start
+pnpm run start
 ```
 
 This will initialize the Playwright browser, scrape job openings for React, Node, and Python, and log the total number of job openings found.
+
+```
+pnpm run debug
+```
+
+This will initialize the Playwright browser with debug mode, scrape job openings for React, Node, and Python, and log the total number of job openings found.
 
 ## Contributing
 
