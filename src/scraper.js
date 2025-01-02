@@ -14,7 +14,7 @@ async function scrapeJobOpenings(jobTitles) {
     try {
       await page.goto(`${process.env.JOB_SITE_URL}`, { timeout: 60000 }); // Increased timeout and wait for network to be idle
       // await page.waitForLoadState('load')
-      await randomDelay(page);
+    //   await randomDelay(page);
       // Wait for the input element to be available
       await page.waitForSelector(
         "#heroSectionDesktop-skillsAutoComplete--input",
@@ -24,9 +24,9 @@ async function scrapeJobOpenings(jobTitles) {
       await page.fill("#heroSectionDesktop-skillsAutoComplete--input", title, {
         timeout: 60000,
       });
-      await randomDelay(page);
+    //   await randomDelay(page);
       await page.getByRole("button", { name: "Search" }).nth(0).click();
-      await randomDelay(page);
+    //   await randomDelay(page);
 
       await page.waitForLoadState("load");
       // await  page.screenshot({path: `example-${title}.png`,fullPage: true});
@@ -53,9 +53,9 @@ async function scrapeJobOpenings(jobTitles) {
   return JobOpenings;
 }
 
-async function randomDelay(page) {
-  const randomDelay = 2000 + Math.random() * 1000;
-  await page.waitForTimeout(randomDelay);
-}
+// async function randomDelay(page) {
+//   const randomDelay = 2000 + Math.random() * 1000;
+//   await page.waitForTimeout(randomDelay);
+// }
 
 module.exports = { scrapeJobOpenings };
