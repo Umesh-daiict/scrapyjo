@@ -78,3 +78,8 @@ For more details, refer to the architecture diagram:
 [Excalidraw Diagram](https://excalidraw.com/#json=WaXRcUCyqgUxyaPtSR34C,QAh9bs3ZCOmbf0EqgQr6qA)
 
 ![Backend Infrastructure](./assets/be-infra-v1.png)
+
+## todo
+
+ aws deplaoy , vidoe
+ infra as code 
