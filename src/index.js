@@ -2,7 +2,9 @@
 
 const { scrapeJobOpenings } = require("./scraper");
 
-(async function () {
+(async function () {})();
+export const handler = async (event) => {
+
   try {
     const jobTitles = [
       "React",
@@ -13,8 +15,16 @@ const { scrapeJobOpenings } = require("./scraper");
       "Backend Developer",
     ];
     const jobCounts = await scrapeJobOpenings(jobTitles);
-    console.log("Jobs:", jobCounts);
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify(jobCounts),
+    };
+    return response;
   } catch (error) {
-    console.error("Error while scraping job openings:", error);
+    const response = {
+      statusCode: 400,
+      body: JSON.stringify(error),
+    };
+    return response;
   }
-})();
+};
