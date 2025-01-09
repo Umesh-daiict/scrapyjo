@@ -1,13 +1,16 @@
-require("dotenv").config();
+import 'dotenv/config';
+import playwright   from 'playwright-aws-lambda';
 
-const { firefox } = require("playwright");
+export async function scrapeJobOpenings(jobTitles) {
+  browser = await playwright.launchChromium();
+  const context = await browser.newContext({userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"});
 
-async function scrapeJobOpenings(jobTitles) {
-  const browser = await firefox.launch();
-  const context = await browser.newContext({
-    userAgent:
-      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/109.0",
-  });
+
+//  const browser = await firefox.launch();
+  //const context = await browser.newContext({
+    //userAgent:
+    //  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/109.0",
+  //});
   const page = await context.newPage();
   const JobOpenings = {};
   console.log(`Scraping job openings from ${process.env.JOB_SITE_URL}...`);
@@ -38,7 +41,7 @@ async function scrapeJobOpenings(jobTitles) {
       const match = titleText.match(/(\d+)\s+Results\s+Found/); // Extract the job count using regex
       const count = match ? parseInt(match[1], 10) : 0; // Parse the job count
       console.log(`Job openings for title "${title}": ${count}`);
-      JobOpenings[title] = isNaN(count) ? 0 : count;
+      JobOpenings[title] = count;
     } catch (error) {
       console.error(
         `Error while scraping job openings for title "${title}":`,
@@ -54,10 +57,3 @@ async function scrapeJobOpenings(jobTitles) {
   await browser.close();
   return JobOpenings;
 }
-
-// async function randomDelay(page) {
-//   const randomDelay = 2000 + Math.random() * 1000;
-//   await page.waitForTimeout(randomDelay);
-// }
-
-module.exports = { scrapeJobOpenings };
