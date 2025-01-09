@@ -1,5 +1,4 @@
 // src/index.js
-require("dotenv").config();
 
 const { scrapeJobOpenings } = require("./scraper");
 
