@@ -2,9 +2,10 @@ import 'dotenv/config';
 import playwright   from 'playwright-aws-lambda';
 
 export async function scrapeJobOpenings(jobTitles) {
-  browser = await playwright.launchChromium();
-  const context = await browser.newContext({userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"});
-
+  const browser = await playwright.launchChromium({ headless: true ,args: ['--disable-web-security']});
+  // // const context = await browser.newContext({userAgent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"});
+  // const browser = await playwright.launchFirefox({ headless: true });
+  const context = await browser.newContext();
 
 //  const browser = await firefox.launch();
   //const context = await browser.newContext({
@@ -12,6 +13,12 @@ export async function scrapeJobOpenings(jobTitles) {
     //  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/109.0",
   //});
   const page = await context.newPage();
+    // Set custom headers, including the user-agent
+    // await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36');
+
+    // await page.setExtraHTTPHeaders({
+    //   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36'
+    // });
   const JobOpenings = {};
   console.log(`Scraping job openings from ${process.env.JOB_SITE_URL}...`);
      
