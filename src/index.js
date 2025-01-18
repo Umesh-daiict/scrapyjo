@@ -2,8 +2,7 @@
 require("dotenv").config();
 
 const { scrapeJobOpenings } = require("./scraper");
-
-(async function () {
+exports.handler = async (event) => {
   try {
     const jobTitles = [
       "React",
@@ -14,8 +13,11 @@ const { scrapeJobOpenings } = require("./scraper");
       "Backend Developer",
     ];
     const jobCounts = await scrapeJobOpenings(jobTitles);
-    console.log("Jobs:", jobCounts);
+ 
+    
+    return { statusCode: 200, body: jobCounts };
   } catch (error) {
-    console.error("Error while scraping job openings:", error);
-  }
-})();
+    console.error('Error during scraping:', error);
+    return { statusCode: 500, body: JSON.stringify(error.message) };
+  } 
+}
